@@ -1,28 +1,37 @@
 <div class="row">
   <div class="col-md-2">
   <form ng-submit="searchPhoto()">
-    <input type="text" class="form-control" placeholder="user_id" ng-model="searchFilter.user_id">
-    <input type="text" class="form-control" placeholder="tags" ng-model="searchFilter.tags">
-    <input type="text" class="form-control" placeholder="text" ng-model="searchFilter.text">
+    <input type="text" class="form-control" placeholder="user_id" ng-model="searchFilter.user_id"><br />
+    <input type="text" class="form-control" placeholder="tags" ng-model="searchFilter.tags"><br />
+    <input type="text" class="form-control" placeholder="text" ng-model="searchFilter.text"><br />
 
-    <button type="submit" class="btn btn-md btn-primary">Search</button>
+    <button type="submit" class="btn btn-md btn-primary btn-block">Search</button>
   </form>
 
   </div>
-  <div class="col-md-8">
+  <div class="col-md-10">
 
-    <div uib-carousel active="active" interval="5000" no-wrap="noWrapSlides">
-      <div uib-slide ng-repeat="photo in photos track by $index" index="$index">
-        <img ng-src="{{ photo.url_l }}" style="margin:auto;">
-        <!--<div class="carousel-caption">
+    <div class="row">
+      <div class="col-md-7">
+        <img ng-src="{{ selectedPhoto }}" class="img-responsive" style="width: 100%; max-height: 600px;">
+      </div>
+      <div class="col-md-5">
+        <ui-gmap-google-map center="map.center" options="options" zoom="map.zoom">
+           <ui-gmap-marker coords="marker.coords" idkey="'1'"></ui-gmap-marker>
+        </ui-gmap-google-map>
+        <hr />
+        
+        <span ng-repeat="tag in tags track by $index"><span class="label" ng-random-class="classes" >{{tag}}</span> </span>
 
-        </div>-->
       </div>
     </div>
 
+    <hr />
 
-    <!-- <div ng-repeat="photo in photos track by $index">
-      <img ng-src="{{ photo.url_l }}">
-    </div> -->
+    <div class="row">
+      <div class="col-md-1" ng-repeat="photo in photos track by $index">
+        <img ng-src="{{ photo.url_l }}" class="img-thumbnail" ng-click="changeImage(photo)">
+      </div>
+    </div>
   </div>
 </div>

@@ -1,2 +1,28 @@
-<h1>Hello world</h1>
-<p class="text-primary">{{ helloworld }}</p>
+<div class="row">
+  <div class="col-md-2">
+  <form ng-submit="searchPhoto()">
+    <input type="text" class="form-control" placeholder="user_id" ng-model="searchFilter.user_id">
+    <input type="text" class="form-control" placeholder="tags" ng-model="searchFilter.tags">
+    <input type="text" class="form-control" placeholder="text" ng-model="searchFilter.text">
+
+    <button type="submit" class="btn btn-md btn-primary">Search</button>
+  </form>
+
+  </div>
+  <div class="col-md-8">
+
+    <div uib-carousel active="active" interval="5000" no-wrap="noWrapSlides">
+      <div uib-slide ng-repeat="photo in photos track by $index" index="$index">
+        <img ng-src="{{ photo.url_l }}" style="margin:auto;">
+        <!--<div class="carousel-caption">
+
+        </div>-->
+      </div>
+    </div>
+
+
+    <!-- <div ng-repeat="photo in photos track by $index">
+      <img ng-src="{{ photo.url_l }}">
+    </div> -->
+  </div>
+</div>

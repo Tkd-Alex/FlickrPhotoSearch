@@ -15,6 +15,7 @@ return {
 
 app.controller('homeController', function ($scope, $http) {
 
+  var api_key =  "85c79d12baaa29778e1b1d81a836eaab";
   $scope.searchFilter = {};
   $scope.selectedPhoto = "http://www.androidworld.it/wp-content/uploads/2013/05/flickr.png";
   $scope.tags = {};
@@ -46,7 +47,7 @@ app.controller('homeController', function ($scope, $http) {
   };
 
   $scope.getExif = function(photoid){
-    var link = "https://api.flickr.com/services/rest/?method=flickr.photos.getExif&api_key=52cab487e6b7e467543ec4f8594f8046&photo_id=" + photoid +"&format=json&nojsoncallback=1";
+    var link = "https://api.flickr.com/services/rest/?method=flickr.photos.getExif&api_key=" +api_key + "&photo_id=" + photoid +"&format=json&nojsoncallback=1";
     $http.get(link)
       .then(function(response) {
         if(response.data.stat == "ok"){
@@ -74,7 +75,7 @@ app.controller('homeController', function ($scope, $http) {
                   "&page=1" +
                   "&sort=" + $scope.searchFilter.sort;
 
-    var link = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=f0c6a72c9ab375e55dea57566b7e8905" + parameters + "&format=json&nojsoncallback=1";
+    var link = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + api_key + parameters + "&format=json&nojsoncallback=1";
 
     $http.get(link)
       .then(function(response) {

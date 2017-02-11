@@ -32,7 +32,6 @@ app.controller('homeController', function ($scope, $http) {
   $scope.marker = {coords: angular.copy($scope.map.center)};
 
   $scope.changeImage = function(photo) {
-    console.log(photo);
     $scope.getExif(photo.id);
     $scope.selectedPhoto = photo.url_l;
     $scope.map.center.latitude = photo.latitude;
@@ -47,16 +46,19 @@ app.controller('homeController', function ($scope, $http) {
   };
 
   $scope.getExif = function(photoid){
-    var link = "https://api.flickr.com/services/rest/?method=flickr.photos.getExif&api_key=52cab487e6b7e467543ec4f8594f8046&photo_id=" + photoid +"&format=rest";
+    var link = "https://api.flickr.com/services/rest/?method=flickr.photos.getExif&api_key=52cab487e6b7e467543ec4f8594f8046&photo_id=" + photoid +"&format=json&nojsoncallback=1";
     $http.get(link)
       .then(function(response) {
-        if(response.data.stat == "ok")
-          console.log(response.data);
+        if(response.data.stat == "ok"){
+          $scope.camera = response.data.photo.camera;
+          console.log($scope.camera);
+        }
       });
   };
 
   $scope.searchPhoto = function(){
     var parameters = "";
+    $scope.camera = "";
 
     if($scope.searchFilter.user_id && $scope.searchFilter.user_id !== "")
       parameters += "&user_id=" + $scope.searchFilter.user_id;
@@ -69,7 +71,8 @@ app.controller('homeController', function ($scope, $http) {
                   "&has_geo=1" +
                   "&extras=url_c%2C+url_l%2C+url_o%2Cgeo%2C+tags" +
                   "&per_page=12" +
-                  "&page=1";
+                  "&page=1" +
+                  "&sort=" + $scope.searchFilter.sort;
 
     var link = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=f0c6a72c9ab375e55dea57566b7e8905" + parameters + "&format=json&nojsoncallback=1";
 

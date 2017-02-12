@@ -6,3 +6,21 @@ body {
     height: 200px;
     width: 100%;
 }
+
+/* Table fix header - footer */
+.table-fix-header-footer tbody {
+    display:block;
+    min-height: 240px;
+    max-height: 300px;
+    overflow:auto;
+}
+
+.table-fix-header-footer thead, .table-fix-header-footer tfoot, .table-fix-header-footer tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;
+}
+
+.table-fix-header-footer thead, .table-fix-header-footer tfoot{
+    width: calc( 100% - 1em );
+}

@@ -17,6 +17,7 @@ app.controller('homeController', function ($scope, $http) {
 
   var api_key =  "85c79d12baaa29778e1b1d81a836eaab";
   $scope.searchFilter = {};
+  $scope.searchFilter.sort = "date-posted-desc";
   $scope.selectedPhoto = "http://www.androidworld.it/wp-content/uploads/2013/05/flickr.png";
   $scope.tags = {};
 
@@ -51,8 +52,9 @@ app.controller('homeController', function ($scope, $http) {
     $http.get(link)
       .then(function(response) {
         if(response.data.stat == "ok"){
+          $scope.exifs = response.data.photo.exif;
+          console.log($scope.exifs);
           $scope.camera = response.data.photo.camera;
-          console.log($scope.camera);
         }
       });
   };

@@ -25,9 +25,17 @@
   <div class="col-md-10">
 
     <div class="row">
+
       <div class="col-md-7">
         <img ng-src="{{ selectedPhoto }}" class="img-responsive" style="width: 100%; max-height: 600px;">
+        <hr />
+        <div class="row">
+          <div class="col-md-2" ng-repeat="photo in photos track by $index">
+            <img ng-src="{{ photo.url_l }}" class="img-thumbnail" ng-click="changeImage(photo)">
+          </div>
+        </div>
       </div>
+
       <div class="col-md-5">
         <ui-gmap-google-map center="map.center" options="options" zoom="map.zoom">
            <ui-gmap-marker coords="marker.coords" idkey="'1'"></ui-gmap-marker>
@@ -44,16 +52,8 @@
           </tbody>
         </table>
         <span ng-repeat="tag in tags track by $index"><span class="label" ng-random-class="classes" >{{tag}}</span> </span>
-
       </div>
     </div>
 
-    <hr />
-
-    <div class="row">
-      <div class="col-md-2" ng-repeat="photo in photos track by $index">
-        <img ng-src="{{ photo.url_l }}" class="img-thumbnail" ng-click="changeImage(photo)">
-      </div>
-    </div>
   </div>
 </div>

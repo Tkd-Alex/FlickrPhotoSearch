@@ -34,6 +34,8 @@ app.controller('homeController', function ($scope, $http) {
   $scope.marker = {coords: angular.copy($scope.map.center)};
 
   $scope.changeImage = function(photo) {
+    $scope.exifs = "";
+    $scope.camera = "";
     $scope.getExif(photo.id);
     $scope.selectedPhoto = photo.url_l;
     $scope.map.center.latitude = photo.latitude;
@@ -60,8 +62,6 @@ app.controller('homeController', function ($scope, $http) {
 
   $scope.searchPhoto = function(){
     var parameters = "";
-    $scope.exifs = "";
-    $scope.camera = "";
 
     if($scope.searchFilter.user_id && $scope.searchFilter.user_id !== "")
       parameters += "&user_id=" + $scope.searchFilter.user_id;

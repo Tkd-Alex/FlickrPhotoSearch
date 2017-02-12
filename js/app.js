@@ -53,7 +53,6 @@ app.controller('homeController', function ($scope, $http) {
       .then(function(response) {
         if(response.data.stat == "ok"){
           $scope.exifs = response.data.photo.exif;
-          console.log($scope.exifs);
           $scope.camera = response.data.photo.camera;
         }
       });
@@ -61,6 +60,7 @@ app.controller('homeController', function ($scope, $http) {
 
   $scope.searchPhoto = function(){
     var parameters = "";
+    $scope.exifs = "";
     $scope.camera = "";
 
     if($scope.searchFilter.user_id && $scope.searchFilter.user_id !== "")
